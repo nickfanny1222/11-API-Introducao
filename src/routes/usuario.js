@@ -7,7 +7,7 @@ import { selectUsuarios,
          insertUsuario,
          deleteUsuario,
          updateUsuario 
-        }from "./bd.js";
+        }from "../db/index.js";
 
 router.get("/usuarios", async (req, res) => {
     console.log("Rota GET/usuarios solicitada");
