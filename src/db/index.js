@@ -2,6 +2,15 @@
 import pkg from "pg";
 const { Pool } = pkg;
 
+
+async function autenticarUsuario(email, senha) {
+  const client = await connect();
+  const query = "SELECT * FROM usuario WHERE email = $1 AND senha = $2";
+  const usuario = [email, senha];
+  const res = await client.query(query, usuario);
+  return res.rows[0];
+}
+
 async function connect() {
   const pool = new Pool({
     connectionString: process.env.URL_BD,
@@ -45,4 +54,4 @@ async function updateUsuario(data) {
   await client.query(query, usuario);
 }
 //bd.js
-export { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario, updateUsuario };
+export { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario, updateUsuario, autenticarUsuario };
